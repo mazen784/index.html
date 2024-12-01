@@ -1,0 +1,375 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عيد ميلاد سعيد يا أسماء!</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ملف styles.css */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .home-page, .countdown-page, .message-page, .thank-you-page {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+            animation: backgroundAnimation 6s infinite alternate;
+            text-align: center;
+            color: white;
+        }
+
+        @keyframes backgroundAnimation {
+            0% {
+                background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+            }
+            100% {
+                background: linear-gradient(to bottom, #fbc2eb, #a18cd1);
+            }
+        }
+
+        .content {
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .timer {
+            font-size: 2em;
+            margin-top: 20px;
+            color: #ffffff;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        #birthdayMessage {
+            font-size: 3em;
+            color: #ff69b4;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        button {
+            background-color: #ffffff;
+            color: #ff69b4;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background-color: #ff69b4;
+            color: white;
+        }
+
+        /* صفحة منبثقة (Popup) */
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .popup-content h1 {
+            font-size: 2.5em;
+            color: #ff69b4;
+            margin-bottom: 20px;
+        }
+
+        .popup-content p {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        button {
+            background-color: #ffffff;
+            color: #ff69b4;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background-color: #ff69b4;
+            color: white;
+        }
+
+        /* صفحة الختام (Thank You) */
+        .thank-you-page {
+            background: url('https://source.unsplash.com/1600x900/?romantic,hearts') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            font-size: 2em;
+            padding: 30px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .thank-you-page h1 {
+            font-size: 3em;
+            color: #ff69b4;
+        }
+
+        /* زر تغيير اللغة */
+        .language-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #ffffff;
+            color: #ff69b4;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+
+        /* النص في صفحة الرسائل */
+        .message-box {
+            font-size: 1.5em;
+            line-height: 1.6em;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        /* خط أكبر للنص */
+        .message-box p {
+            font-size: 2.5em;
+            line-height: 1.8em;
+        }
+     html, body {
+    height: 100%;  /* التأكد من أن الصفحة تمتد من الأعلى إلى الأسفل */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;  /* استخدام flex لضمان الامتداد العمودي */
+    justify-content: flex-start;  /* التأكد من أن المحتوى يبدأ من الأعلى */
+    overflow: auto;  /* يسمح بالتمرير إذا كان المحتوى أكبر من الشاشة */
+}
+
+.home-page, .countdown-page, .message-page, .thank-you-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  /* التأكد من محاذاة المحتوى عموديًا */
+    align-items: center;
+    background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+    animation: backgroundAnimation 6s infinite alternate;
+    text-align: center;
+    color: white;
+    height: 100%;  /* التأكد من أن كل صفحة تمتد بالكامل */
+    min-height: 100%;  /* في حالة وجود محتوى أقل، الصفحة لا تصبح أصغر من 100% من ارتفاع النافذة */
+}
+
+@keyframes backgroundAnimation {
+    0% {
+        background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+    }
+    100% {
+        background: linear-gradient(to bottom, #fbc2eb, #a18cd1);
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- زر تغيير اللغة -->
+    <button class="language-toggle" onclick="toggleLanguage()">Change Language</button>
+
+    <!-- صفحة البداية -->
+    <div class="home-page" id="homePage">
+        <div class="content">
+            <h1 id="homeTitle">عيد ميلاد سعيد يا أسماء!</h1>
+            <button onclick="showCountdown()" id="homeButton">ابدئي رحلتك</button>
+        </div>
+    </div>
+
+    <!-- صفحة العد التنازلي -->
+    <div class="countdown-page" id="countdownPage" style="display: none;">
+        <div class="content">
+            <h1 id="birthdayMessage" style="display: none;">Happy Birthday Asmaa!</h1>
+            <div id="timer" class="timer">
+                <span id="hours">00</span> ساعة
+                <span id="minutes">00</span> دقيقة
+                <span id="seconds">00</span> ثانية
+            </div>
+            <button id="messageButton" onclick="showMessagePage()" style="display: none;" id="countdownButton">تفضلي</button>
+        </div>
+    </div>
+
+    <!-- صفحة الرسائل -->
+    <div class="message-page" id="messagePage" style="display: none;">
+        <div class="content">
+            <h1 class="birthday-header">Happy Birthday Asmaa</h1>
+            <div class="message-box" id="messageBox">
+                <p id="messageText">
+                    My dearest Asmaa,<br>
+                    On your special day, I want to remind you of how incredibly special you are to me. Your kindness, beauty, and love make every day of my life so much brighter. I am forever grateful for your presence and for the love you give me. Happy Birthday to the woman who fills my heart with happiness.<br><br>
+                    
+                    With each passing year, you become more amazing and beautiful in every way. I am lucky beyond words to be able to share my life with you. Your smile, your laugh, and your warmth make everything better. Thank you for being the best part of my life. Happy Birthday, my love.<br><br>
+                    
+                    As we celebrate your birthday today, I want to thank you for the countless memories we’ve made together and for the love you show me every day. You inspire me in ways you will never know. I look forward to many more birthdays by your side, making beautiful memories together.<br><br>
+                    
+                    You are not only the love of my life, but also my best friend, my greatest supporter, and my greatest happiness. On your birthday, I wish you all the love and joy in the world, because you deserve nothing less. Happy Birthday, my beautiful Asmaa.<br><br>
+                    
+                    No words can truly express how much you mean to me. Every day with you is a gift, and I feel so blessed to have you in my life. I can’t wait to continue this beautiful journey with you, creating even more unforgettable moments. Happy Birthday, my heart’s desire.
+                </p>
+            </div>
+            <button onclick="showGiftsPopup()">صفحة الهدايا (Gifts)</button>
+            <button onclick="showThankYouPage()">صفحة الختام</button>
+        </div>
+    </div>
+
+    <!-- صفحة الهدايا (منبثقة) -->
+    <div class="popup" id="giftsPopup" style="display: none;">
+        <div class="popup-content">
+            <h1>Happy Birthday Asmaa</h1>
+            <p id="rechargeCode">*858*0101166109720913#</p>
+            <button onclick="copyRechargeCode()">نسخ الكود</button>
+            <button onclick="closeGiftsPopup()">إغلاق</button>
+        </div>
+    </div>
+
+    <!-- صفحة الختام -->
+    <div class="thank-you-page" id="thankYouPage" style="display: none;">
+        <h1>شكرًا لأنكِ جعلتِ حياتي أجمل. عيد ميلاد سعيد يا أسماء. أحبك!</h1>
+        <button onclick="goBackToHome()">الرجوع إلى الصفحة الرئيسية</button>
+    </div>
+
+    <script>
+        let isArabic = true; // المتغير لتحديد اللغة (عربي / إنجليزي)
+
+        // لبدء العد التنازلي
+        function showCountdown() {
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('countdownPage').style.display = 'flex';
+            startCountdown();
+        }
+
+        function startCountdown() {
+            const countDownDate = new Date("Dec 1, 2024 23:59:59").getTime();
+            const countdown = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = countDownDate - now;
+
+                const hours = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const minutes = Math.floor((distance % (1000 * 60)) / 1000);
+                const seconds = Math.floor((distance % (1000)) / 1000);
+
+                document.getElementById("hours").innerHTML = formatTime(hours);
+                document.getElementById("minutes").innerHTML = formatTime(minutes);
+                document.getElementById("seconds").innerHTML = formatTime(seconds);
+
+                if (distance < 0) {
+                    clearInterval(countdown);
+                    document.getElementById('birthdayMessage').style.display = 'block';
+                    document.getElementById('messageButton').style.display = 'block';
+                }
+            }, 1000);
+        }
+
+        function formatTime(time) {
+            return time < 10 ? "0" + time : time;
+        }
+
+        // عرض صفحة الرسائل
+        function showMessagePage() {
+            document.getElementById('countdownPage').style.display = 'none';
+            document.getElementById('messagePage').style.display = 'flex';
+            displayMessage();
+        }
+
+        function displayMessage() {
+            const message = isArabic
+                ? "عزيزتي أسماء، في يومك الخاص، أود أن أذكرك كم أنكِ رائعة بالنسبة لي. جمالك، طيبتك، وحبك يجعل كل يوم في حياتي أكثر إشراقًا. أنا ممتن لكِ للأبد على وجودك في حياتي وحبك لي. عيد ميلاد سعيد لأروع امرأة في حياتي."
+                : "My dearest Asmaa, On your special day, I want to remind you of how incredibly special you are to me. Your kindness, beauty, and love make every day of my life so much brighter. I am forever grateful for your presence and for the love you give me. Happy Birthday to the woman who fills my heart with happiness.";
+
+            document.getElementById("messageText").innerHTML = message;
+        }
+
+        function copyRechargeCode() {
+            const code = document.getElementById('rechargeCode').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                alert('تم نسخ الكود بنجاح!');
+            }).catch(err => {
+                alert('حدث خطأ أثناء نسخ الكود.');
+            });
+        }
+
+        function closeGiftsPopup() {
+            document.getElementById('giftsPopup').style.display = 'none';
+        }
+
+        function showGiftsPopup() {
+            document.getElementById('giftsPopup').style.display = 'flex';
+        }
+
+        function showThankYouPage() {
+            document.getElementById('messagePage').style.display = 'none';
+            document.getElementById('thankYouPage').style.display = 'flex';
+        }
+
+        function goBackToHome() {
+            document.getElementById('thankYouPage').style.display = 'none';
+            document.getElementById('homePage').style.display = 'flex';
+        }
+
+        function toggleLanguage() {
+            isArabic = !isArabic;
+
+            const homeTitle = document.getElementById("homeTitle");
+            const homeButton = document.getElementById("homeButton");
+            const messageButton = document.getElementById("messageButton");
+
+            if (isArabic) {
+                homeTitle.innerText = "عيد ميلاد سعيد يا أسماء!";
+                homeButton.innerText = "ابدئي رحلتك";
+                messageButton.innerText = "تفضلي";
+            } else {
+                homeTitle.innerText = "Happy Birthday Asmaa!";
+                homeButton.innerText = "Start Your Journey";
+                messageButton.innerText = "Please";
+            }
+
+            displayMessage();
+        }
+    </script>
+</body>
+</html>
